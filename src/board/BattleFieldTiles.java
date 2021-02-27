@@ -5,7 +5,7 @@ public class BattleFieldTiles {
     private int row;
     private int col;
     Color color;
-    private int tileSize=10;
+    private int tileSize=70;
 
     public BattleFieldTiles(int row, int col, Color color){
         this.row=row;
