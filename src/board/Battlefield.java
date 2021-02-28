@@ -3,19 +3,20 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Battlefield extends JFrame implements MouseListener {
     private Object[][] battleField;
 
     public void renderBattleField() {
-        this.battleField = new Object[7][9];
+        this.battleField = new Object[8][10];
         Color color = null;
 
         int row=0;
         int col=0;
-        for (row = 0; row < 7; row++) {
+        for (row = 1; row < 8; row++) {
                 if(row%2==0) {
-                    for (col = 0; col < 9; col++) {
+                    for (col = 1; col < 10; col++) {
                         if(col%2==0) {
                             this.battleField[row][col] = new BattleFieldTiles(row, col, color.WHITE);
                         } else {
@@ -23,7 +24,7 @@ public class Battlefield extends JFrame implements MouseListener {
                         }
                     }
                 } else {
-                    for (col = 0; col < 9; col++) {
+                    for (col = 1; col < 10; col++) {
                         if(col%2==0) {
                             this.battleField[row][col] = new BattleFieldTiles(row, col, color.BLACK);
                         } else {
@@ -32,11 +33,29 @@ public class Battlefield extends JFrame implements MouseListener {
                     }
                 }
         }
-        for(row=2;row<5;row++){
-            for(col=0;col<9;col++){
+        for(row=3;row<6;row++){
+            for(col=1;col<10;col++){
                 this.battleField[row][col] = new BattleFieldTiles(row, col, color.LIGHT_GRAY);
             }
         }
+        int numberOfGeneratedObstacles = ThreadLocalRandom.current().nextInt(1, 6);
+        for(int i=0; i < numberOfGeneratedObstacles; ++i){
+            int obstacleRow = ThreadLocalRandom.current().nextInt(3, 6);
+            int obstacleCol = ThreadLocalRandom.current().nextInt(1, 10);
+            BattleFieldTiles bt2 = new BattleFieldTiles(row, col, color.WHITE);
+            this.battleField[obstacleRow][obstacleCol]=bt2;
+            this.repaint();
+        }
+
+        int colBoundary=10;
+        int rowBoundary=8;
+        for(row=7;row < rowBoundary; row++){
+            for(col=1;col<colBoundary; col++){
+
+            }
+
+        }
+
 
 
         this.setSize(1000, 700);
@@ -50,8 +69,8 @@ public class Battlefield extends JFrame implements MouseListener {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        for (int row = 0; row < 7; row++) {
-            for (int col = 0; col < 9; col++) {
+        for (int row = 1; row < 8; row++) {
+            for (int col = 1; col < 10; col++) {
                 BattleFieldTiles bt1 = (BattleFieldTiles) this.getBoardPixel(row, col);
                 bt1.render(g);
             }
