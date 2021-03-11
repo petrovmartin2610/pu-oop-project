@@ -23,7 +23,5 @@ public class Elf extends CommonFigureTraits{
         g.fillRect(tileX, tileY, tileSize, tileSize);
     }
 
-    public static int getPixelSize() {
-        return tileSize;
-    }
+
 }

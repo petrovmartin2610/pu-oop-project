@@ -13,6 +13,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * Клас BattleField, генериращ игралната дъска и игралните фигурки с техните съответни характеристики
  */
 public class Battlefield extends JFrame implements MouseListener{
+    //обекти и променливи с глобален scope за да може да се използват в различни методи в целия клас
     private Object[][] battleField;
     public int amountOfDwarfs=2;
     public int amountOfElves=2;
@@ -20,12 +21,12 @@ public class Battlefield extends JFrame implements MouseListener{
     public int row;
     public int col;
     Color color;
-    Dwarf dw1 = new Dwarf(row,col,6,2,10, 2,2,true,"DW",color);
-    Dwarf dw2 = new Dwarf(row,col,6,2,10, 2,2,true,"DW",color);
-    Knight k1 = new Knight(row,col,6,2,10, 2,2,true,"K",color);
-    Knight k2 = new Knight(row,col,6,2,10, 2,2,true,"K",color);
-    Elf e1 = new Elf(row,col,6,2,10, 2,2,true,"E",color);
-    Elf e2 = new Elf(row,col,6,2,10, 2,2,true,"E",color);
+    Dwarf dw1 = new Dwarf(row,col,6,2,12, 2,2,true,"DW",color);
+    Dwarf dw2 = new Dwarf(row,col,6,2,12, 2,2,true,"DW",color);
+    Knight k1 = new Knight(row,col,8,3,15, 1,1,true,"K",color);
+    Knight k2 = new Knight(row,col,8,3,15, 1,1,true,"K",color);
+    Elf e1 = new Elf(row,col,5,1,10, 3,3,true,"E",color);
+    Elf e2 = new Elf(row,col,5,1,10, 3,3,true,"E",color);
 
 
     /**
@@ -35,11 +36,12 @@ public class Battlefield extends JFrame implements MouseListener{
         this.battleField = new Object[8][10];
         Color color = null;
 
+        //визуализация на квадратчетата
         row=0;
         col=0;
-        for (row = 0; row < 8; row++) {
+        for (row = 1; row < 8; row++) {
                 if(row%2==0) {
-                    for (col = 0; col < 10; col++) {
+                    for (col = 1; col < 10; col++) {
                         if(col%2==0) {
                             this.battleField[row][col] = new BattleFieldTiles(row, col, Color.WHITE);
                         } else {
@@ -47,7 +49,7 @@ public class Battlefield extends JFrame implements MouseListener{
                         }
                     }
                 } else {
-                    for (col = 0; col < 10; col++) {
+                    for (col = 1; col < 10; col++) {
                         if(col%2==0) {
                             this.battleField[row][col] = new BattleFieldTiles(row, col, Color.BLACK);
                         } else {
@@ -56,11 +58,14 @@ public class Battlefield extends JFrame implements MouseListener{
                     }
                 }
         }
-        for(row=2;row<5;row++){
-            for(col=0;col<10;col++){
+        for(row=3;row<6;row++){
+            for(col=1;col<10;col++){
                 this.battleField[row][col] = new BattleFieldTiles(row, col, Color.GRAY);
             }
         }
+
+        //TODO: препятствията се генерират, но се визуализират "прозрачни", все едно въобще няма квадратче на дадените к-ти
+        //не успях да открия къде се корени този проблем, или поне при мен се визуализира така
         int numberOfGeneratedObstacles = ThreadLocalRandom.current().nextInt(1, 6);
         for(int i=0; i < numberOfGeneratedObstacles; ++i){
             int obstacleRow = ThreadLocalRandom.current().nextInt(3, 6);
@@ -71,6 +76,7 @@ public class Battlefield extends JFrame implements MouseListener{
         }
 
 
+        //размери на JFrame
         this.setSize(1000, 700);
         this.setVisible(true);
         this.setTitle("An epic battle of warriors");
@@ -85,8 +91,8 @@ public class Battlefield extends JFrame implements MouseListener{
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        for (int row = 0; row < 8; row++) {
-            for (int col = 0; col < 10; col++) {
+        for (int row = 1; row < 8; row++) {
+            for (int col = 1; col < 10; col++) {
                 BattleFieldTiles bt1 = (BattleFieldTiles) this.getBoardPixel(row, col);
                 bt1.render(g);
             }
@@ -116,11 +122,14 @@ public class Battlefield extends JFrame implements MouseListener{
      */
     @Override
     public void mouseClicked(MouseEvent e) {
+        //TODO: фигурките се генерират, но се визуализират "прозрачни", все едно въобще няма квадратче на дадените к-ти
+        //не успях да открия къде се корени този проблем, или поне при мен се визуализира така
         int row = this.tileCoordinates(e.getY());
         int col = this.tileCoordinates(e.getX());
 
+        //проверка ако са изерпани броя налични джуджета да започне рендериране на рицарите
         if(amountOfDwarfs<=0){
-            if(row>1 || col>9){
+            if(row>2 || col>10){
                 System.out.println("You've chosen coordinates outside of the battlefield, try again!");
             } else {
                 this.battleField[row][col]=k1;
@@ -136,6 +145,7 @@ public class Battlefield extends JFrame implements MouseListener{
             }
         }
 
+        //проверка ако са изерпани броя налични рицари да започне рендериране на елфите
         if(amountOfKnights<=0){
             if(row>1 || col>9){
                 System.out.println("You've chosen coordinates outside of the battlefield, try again!");
@@ -153,11 +163,13 @@ public class Battlefield extends JFrame implements MouseListener{
             }
         }
 
+        //проверка ако всички фигурки са изерпани да се изведе съответно съобщение в конзолата
         if(amountOfKnights==0 && amountOfDwarfs==0 && amountOfElves==0){
             System.out.println("You've placed all your figures on the gameboard, click outside the board " +
                     "to switch to PLayer B figure placement");
         }
 
+        //рендериране на джуджетата
         System.out.println("Choose game figure coordinates for Player A in order: dwarfs, elfs, knights");
         if(row>1 || col>9){
             System.out.println("You've chosen coordinates outside of the battlefield, try again!");
@@ -175,6 +187,8 @@ public class Battlefield extends JFrame implements MouseListener{
         }
     }
 
+
+    //излишни методи
     @Override
     public void mousePressed(MouseEvent e) {
 

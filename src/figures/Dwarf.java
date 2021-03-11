@@ -23,7 +23,5 @@ public class Dwarf extends CommonFigureTraits{
         g.fillRect(tileX, tileY, tileSize, tileSize);
     }
 
-    public static int getTileSize() {
-        return tileSize;
-    }
+
 }

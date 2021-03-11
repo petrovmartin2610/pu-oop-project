@@ -41,7 +41,5 @@ public class CommonFigureTraits extends BattleFieldTiles {
         g.fillRect(tileX, tileY, tileSize, tileSize);
     }
 
-    public static int getTileSize() {
-        return tileSize;
-    }
+
 }
