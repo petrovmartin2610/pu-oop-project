@@ -1,21 +1,25 @@
 package figures;
 import java.awt.*;
+
 public class Knight extends CommonFigureTraits{
     private int row;
     private int col;
+    private static final int tileSize=70;
+    Color color=Color.BLUE;
 
-    public Knight(int attack, int shield, int health, int attackSquares, int speed, boolean alive, String name, Color color) {
-        super(attack, shield, health, attackSquares, speed, alive, name, color);
-        attack=8;
-        shield=3;
-        health=15;
-        attackSquares=1;
-        speed=1;
-        alive=true;
-        name="K";
-        color=null;
+    public Knight(int row, int col, int attack, int shield, int health, int attackSquares, int speed, boolean alive, String name, Color color) {
+        super(row, col, attack, shield, health, attackSquares, speed, alive, name, color);
     }
 
+    public void render(Graphics g) {
+        int tileX = this.col * tileSize;
+        int tileY = this.row * tileSize;
+        g.setColor(this.color);
+        g.drawString("K",95,105);
+        g.fillRect(tileX, tileY, tileSize, tileSize);
+    }
 
-
+    public static int getPixelSize() {
+        return tileSize;
+    }
 }

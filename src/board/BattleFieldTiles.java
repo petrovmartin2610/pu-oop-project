@@ -5,7 +5,7 @@ public class BattleFieldTiles {
     private int row;
     private int col;
     Color color;
-    private int tileSize=70;
+    private static final int tileSize=70;
 
     public BattleFieldTiles(int row, int col, Color color){
         this.row=row;
@@ -20,4 +20,7 @@ public class BattleFieldTiles {
         g.fillRect(tileX, tileY, tileSize, tileSize);
     }
 
+    public static int getTileSize() {
+        return tileSize;
+    }
 }
