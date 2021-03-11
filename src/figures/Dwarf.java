@@ -1,6 +1,10 @@
 package figures;
 import java.awt.*;
 
+/**
+ * @author Martin Petrov
+ * Клас Dwarf, задаващ отделните характеристики на джуджетата и метод за рендериране
+ */
 public class Dwarf extends CommonFigureTraits{
     private int row;
     private int col;

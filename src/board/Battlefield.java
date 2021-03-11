@@ -8,6 +8,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * @author Martin Petrov
+ * Клас BattleField, генериращ игралната дъска и игралните фигурки с техните съответни характеристики
+ */
 public class Battlefield extends JFrame implements MouseListener{
     private Object[][] battleField;
     public int amountOfDwarfs=2;
@@ -23,6 +27,10 @@ public class Battlefield extends JFrame implements MouseListener{
     Elf e1 = new Elf(row,col,6,2,10, 2,2,true,"E",color);
     Elf e2 = new Elf(row,col,6,2,10, 2,2,true,"E",color);
 
+
+    /**
+     * Метод, рендериращ игралната дъска (бойното поле)
+     */
     public void renderBattleField() {
         this.battleField = new Object[8][10];
         Color color = null;
@@ -71,6 +79,9 @@ public class Battlefield extends JFrame implements MouseListener{
 
     }
 
+    /**
+     * Метод, изрисуващ игралната дъска (бойното поле)
+     */
     @Override
     public void paint(Graphics g) {
         super.paint(g);
@@ -83,17 +94,26 @@ public class Battlefield extends JFrame implements MouseListener{
     }
 
 
+    /**
+     * Метод, взимащ отделните елементи от дъската
+     */
     private Object getBoardPixel(int row, int col) {
         return this.battleField[row][col];
     }
 
+
+    /**
+     * Метод, изчисляващ координатите на отделните елементи от дъската
+     */
     private int tileCoordinates(int coordinates) {
         return coordinates / BattleFieldTiles.getTileSize();
     }
 
 
 
-
+    /**
+     * Метод, рендериращ игралните фигурки при натискане на полета от играча
+     */
     @Override
     public void mouseClicked(MouseEvent e) {
         int row = this.tileCoordinates(e.getY());

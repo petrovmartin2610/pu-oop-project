@@ -1,6 +1,10 @@
 package board;
 import java.awt.*;
 
+/**
+ * @author Martin Petrov
+ * Клас BattleFieldТiles, задаващ отделните характеристики на полетата на игралната дъска и метод за рендериране
+ */
 public class BattleFieldTiles {
     private int row;
     private int col;

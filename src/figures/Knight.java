@@ -1,6 +1,10 @@
 package figures;
 import java.awt.*;
 
+/**
+ * @author Martin Petrov
+ * Клас Knight, задаващ отделните характеристики на рицарите и метод за рендериране
+ */
 public class Knight extends CommonFigureTraits{
     private int row;
     private int col;

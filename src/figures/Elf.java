@@ -1,6 +1,10 @@
 package figures;
 import java.awt.*;
 
+/**
+ * @author Martin Petrov
+ * Клас Elf, задаващ отделните характеристики на елфите и метод за рендериране
+ */
 public class Elf extends CommonFigureTraits{
     private int row;
     private int col;

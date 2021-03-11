@@ -1,9 +1,11 @@
 package figures;
-
 import board.BattleFieldTiles;
-
 import java.awt.*;
 
+/**
+ * @author Martin Petrov
+ * Клас CommonFigureTraits, задаващ общите характеристики за всички игрални фигурки, които впоследствие го наследяват
+ */
 public class CommonFigureTraits extends BattleFieldTiles {
     private int row;
     private int col;
