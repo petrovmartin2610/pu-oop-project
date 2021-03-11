@@ -1,10 +1,7 @@
 package board;
-import figures.CommonFigureTraits;
 import figures.Dwarf;
 import figures.Elf;
 import figures.Knight;
-
-import java.util.Scanner;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -16,11 +13,15 @@ public class Battlefield extends JFrame implements MouseListener{
     public int amountOfDwarfs=2;
     public int amountOfElves=2;
     public int amountOfKnights=2;
-    Scanner userinput = new Scanner(System.in);
-    public int figurePrintCountdown=12;
     public int row;
     public int col;
     Color color;
+    Dwarf dw1 = new Dwarf(row,col,6,2,10, 2,2,true,"DW",color);
+    Dwarf dw2 = new Dwarf(row,col,6,2,10, 2,2,true,"DW",color);
+    Knight k1 = new Knight(row,col,6,2,10, 2,2,true,"K",color);
+    Knight k2 = new Knight(row,col,6,2,10, 2,2,true,"K",color);
+    Elf e1 = new Elf(row,col,6,2,10, 2,2,true,"E",color);
+    Elf e2 = new Elf(row,col,6,2,10, 2,2,true,"E",color);
 
     public void renderBattleField() {
         this.battleField = new Object[8][10];
@@ -62,7 +63,6 @@ public class Battlefield extends JFrame implements MouseListener{
         }
 
 
-
         this.setSize(1000, 700);
         this.setVisible(true);
         this.setTitle("An epic battle of warriors");
@@ -83,7 +83,6 @@ public class Battlefield extends JFrame implements MouseListener{
     }
 
 
-
     private Object getBoardPixel(int row, int col) {
         return this.battleField[row][col];
     }
@@ -92,12 +91,7 @@ public class Battlefield extends JFrame implements MouseListener{
         return coordinates / BattleFieldTiles.getTileSize();
     }
 
-    Dwarf dw1 = new Dwarf(row,col,6,2,10, 2,2,true,"DW",color);
-    Dwarf dw2 = new Dwarf(row,col,6,2,10, 2,2,true,"DW",color);
-    Knight k1 = new Knight(row,col,6,2,10, 2,2,true,"K",color);
-    Knight k2 = new Knight(row,col,6,2,10, 2,2,true,"K",color);
-    Elf e1 = new Elf(row,col,6,2,10, 2,2,true,"E",color);
-    Elf e2 = new Elf(row,col,6,2,10, 2,2,true,"E",color);
+
 
 
     @Override

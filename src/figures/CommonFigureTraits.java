@@ -35,6 +35,7 @@ public class CommonFigureTraits extends BattleFieldTiles {
         int tileX = this.col * tileSize;
         int tileY = this.row * tileSize;
         g.setColor(this.color);
+        g.drawString(this.name,95,105);
         g.fillRect(tileX, tileY, tileSize, tileSize);
     }
 
